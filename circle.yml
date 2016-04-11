@@ -13,7 +13,7 @@ deployment:
   staging:
     branch: master
     codedeploy:
-      appname-1234:
+      taaas:
         application_root: /
         region: eu-west-1
         revision_location:
