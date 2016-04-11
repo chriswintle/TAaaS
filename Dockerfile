@@ -1,12 +1,19 @@
-FROM node:argon
+# deploy.sh
+#! /bin/bash
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+SHA1=$1
 
-# Install app dependencies
-COPY package.json /usr/src/app/
-RUN npm install
+# Deploy image to Docker Hub
+docker push circleci/taaas:$SHA1
 
-EXPOSE 8080
+# Create new Elastic Beanstalk version
+EB_BUCKET=hello-bucket
+DOCKERRUN_FILE=$SHA1-Dockerrun.aws.json
+sed "s/<TAG>/$SHA1/" < Dockerrun.aws.json.template > $DOCKERRUN_FILE
+aws s3 cp $DOCKERRUN_FILE s3://$EB_BUCKET/$DOCKERRUN_FILE
+aws elasticbeanstalk create-application-version --application-name taaas \
+  --version-label $SHA1 --source-bundle S3Bucket=$EB_BUCKET,S3Key=$DOCKERRUN_FILE
 
-CMD [ "npm", "start" ]
+# Update Elastic Beanstalk environment to new version
+aws elasticbeanstalk update-environment --environment-name hello-env \
+    --version-label $SHA1
