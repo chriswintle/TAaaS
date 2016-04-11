@@ -15,11 +15,11 @@ deployment:
     codedeploy:
       appname-1234:
         application_root: /
-        region: us-east-1
+        region: eu-west-1
         revision_location:
           revision_type: S3
           s3_location:
-            bucket: my-bucket
+            bucket: cwintle-eb
             key_pattern: taaas-{BRANCH}-{SHORT_COMMIT}
         deployment_group: my-deployment-group
 
