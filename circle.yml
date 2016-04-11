@@ -7,7 +7,6 @@ machine:
 dependencies:
   pre:
     - pip install awscli
-    - docker build -t circleci/taaas:$CIRCLE_SHA1 .
 
 deployment:
   staging:
