@@ -10,9 +10,16 @@ dependencies:
     - docker build -t circleci/taaas:$CIRCLE_SHA1 .
 
 deployment:
-  elasticbeanstalk:
+  staging:
     branch: master
-    commands:
-      - docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - ./deploy.sh $CIRCLE_SHA1
+    codedeploy:
+      appname-1234:
+        application_root: /
+        region: us-east-1
+        revision_location:
+          revision_type: S3
+          s3_location:
+            bucket: my-bucket
+            key_pattern: taaas-{BRANCH}-{SHORT_COMMIT}
+        deployment_group: my-deployment-group
 
