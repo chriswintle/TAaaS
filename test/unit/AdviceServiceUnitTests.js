@@ -46,7 +46,7 @@ describe('AdviceService', function() {
 			}
 
 			//when
-			var result = service.getAdvice();
+			var result = service.getRandomAdvice();
 
 			//then
 			assert(result.tip == "test2", "should return second entry in mocked array ")

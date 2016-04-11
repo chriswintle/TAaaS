@@ -11,7 +11,7 @@ describe('AdviceService', function() {
 			//given
 			
 			//when
-			var result = service.getAdvice();
+			var result = service.getRandomAdvice();
 
 			//then
 			assert(result.tip != undefined)
