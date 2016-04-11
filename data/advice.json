@@ -11,7 +11,8 @@
 		{"id":8, "tip": "Drink Scotch all night then go ona  trampoline."},
 		{"id":9, "tip": "The bus is the perfect place to eat fried chicken."},
 		{"id":10, "tip": "'Don't impersonate a police officer' is more of a guideline than a rule."},
-		{"id":11, "tip": "Branching is a complication - you're a grownup - you can push to Master."}
+		{"id":11, "tip": "Branching is a complication - you're a grownup - you can push to Master."},
+		{"id":11, "tip": "Don’t worry about sanitising DB calls. You’re using Mongo. They’ll probably only try SQL injections anyway"}
 
 	]
 }
