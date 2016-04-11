@@ -3,7 +3,15 @@
 		{"id":0, "tip": "Your boss loves to be tickled"},
 		{"id":1, "tip": "Nobody really takes showers - it's just you. Time to stop!"},
 		{"id":2, "tip": "Speeding cars are more scared of you than you are of them"},
-		{"id":3, "tip": "The trick to being attractive is doing press-ups in the office"}
+		{"id":3, "tip": "The trick to being attractive is doing press-ups in the office"},
+		{"id":4, "tip": "Everyone wants to hear about that time you 'nearly joined the marines'."},
+		{"id":5, "tip": "Your ability to grow a proper beard is limited only by your willpower. Go for it."},
+		{"id":6, "tip": "Test on Production. Your users are your QA!"},
+		{"id":7, "tip": "Don't create backups, it'll make people think twice before deleting files."},
+		{"id":8, "tip": "Drink Scotch all night then go ona  trampoline."},
+		{"id":9, "tip": "The bus is the perfect place to eat fried chicken."},
+		{"id":10, "tip": "'Don't impersonate a police officer' is more of a guideline than a rule."},
+		{"id":11, "tip": "Branching is a complication - you're a grownup - you can push to Master."}
 
 	]
 }
