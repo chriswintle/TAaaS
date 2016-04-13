@@ -13,14 +13,6 @@ dependencies:
 deployment:
   staging:
     branch: master
-    codedeploy:
-      taaas:
-        application_root: /
-        region: eu-west-1
-        revision_location:
-          revision_type: S3
-          s3_location:
-            bucket: cwintle-eb
-            key_pattern: taaas-{BRANCH}-{SHORT_COMMIT}
-        deployment_group: my-deployment-group
+    heroku:
+      appname: taaas
 
