@@ -13,4 +13,6 @@ else {
 }
 config.mongo_url = mongo_url;
 
+console
+
 module.exports = config;

@@ -3,6 +3,7 @@ machine:
     version: 0.10.22
   services:
     - docker
+    - mongo
 
 dependencies:
   pre:
