@@ -1,10 +1,10 @@
-var fs = require('fs');
-var config = require('config');
-
-var Advice = require("./schema/advice.js");
 var Q = require("q");
 
 var AdviceService = function(){
+	var config = require("../config/config");
+	var Advice = require("./schema/advice.js")
+
+	console.log("service config is: "+JSON.stringify(config))
 
 	this.addAdvice = function(text) {
 		var deferred = Q.defer();
@@ -42,11 +42,15 @@ var AdviceService = function(){
 		var deferred = Q.defer();
 		var service = this;
 		
-		this.getAllData().then(function(result){			
+		this.getAllData().then(function(result){		
 			var randomResult = result[service.getRandomIndex(result)];
 			deferred.resolve(randomResult);		
+		},function(err){
+			console.log("problem")
+			deferred.reject("error: "+err)
 		}).catch(function(err){
-			deferred.reject("error")
+			console.log("problem 2")
+			deferred.reject("error: "+err)
 		});
 		return deferred.promise;
 		

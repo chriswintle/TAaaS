@@ -4,11 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require("fs");
 
 var routes = require('./routes/index');
 
 
-var adviceService = require("service/adviceService")
+var AdviceService = require("./services/adviceService")
+
+var service = new AdviceService();
 
 var app = express();
 
@@ -28,9 +31,14 @@ app.use('/', routes);
 
 
 function bootstrapData(){
-  adviceService.getAllData().then(function(result){
+  service.getAllData().then(function(result){
     if(!result || result.length < 1){
-      
+      var obj = JSON.parse(fs.readFileSync('./data/advice.json', 'utf8')).advice;
+
+      for (var i = obj.length - 1; i >= 0; i--) {
+        var result = obj[i];
+        service.addAdvice(result.tip);
+      }
     }
   })
 }
