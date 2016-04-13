@@ -2,6 +2,7 @@ var assert = require('chai').assert;
 var mockFS = require('mock-fs');
 var AdviceService = require('../../services/AdviceService');
 var service = new AdviceService();
+var Q = require("q");
 
 
 describe('AdviceService', function() {
@@ -24,32 +25,32 @@ describe('AdviceService', function() {
 	});
 
 
-	describe("getAdvice()", function(){
+	describe("getAdvice()", function(done){
 
 		it("should return a random entry from advice json", function(){
 			//given
 
-			mockFS({
-			  './data/advice.json': new Buffer(
-			  	JSON.stringify({"advice":
-			  		[
-				  		{"tip":"test1"}, 
-				  		{"tip":"test2"}, 
-				  		{"tip":"test3"}
-			  		]
-			 	 })
-			  	),
-			});
+			service.getData = function(){
+				var deferred = Q.defer();
+				var mockedData = [{"tip":"test1"}, {"tip":"test2"}, {"tip":"test3"}]
+				deferred.resolve(mockedData);
+				return deferred.promise;
+			};
 
 			service.getRandomIndex = function(){
 				return 1;
 			}
 
 			//when
-			var result = service.getRandomAdvice();
+			service.getRandomAdvice().then(function(result){
+
+				//then
+				assert(result.tip == "test2", "should return second entry in mocked array ");
+				done();
+			});
 
 			//then
-			assert(result.tip == "test2", "should return second entry in mocked array ")
+			
 		})
 	})
 });
