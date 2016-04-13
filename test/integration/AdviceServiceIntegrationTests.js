@@ -13,17 +13,15 @@ describe('AdviceService', function() {
 
 		beforeEach(function(done) {
         	//clear down everything in the DB
-        	addEntry("one")
+        	service.addAdvice("one")
         	.then(function(result){
-        		return addEntry("two")
+        		return service.addAdvice("two")
         	})
         	.then(function(result){
         		done();
-				return addEntry("three")
+				return service.addAdvice("three")
 
         	})
-        	
-    	
     	});
 
 		it("should return a random entry from available advice", function(done){
@@ -31,12 +29,17 @@ describe('AdviceService', function() {
 			
 			//when
 			service.getRandomAdvice().then(function(result){
+				
 				//then
-				assert(result.tip != undefined)
+				var possibleOptions = ["one", "two", "three"];
+				assert(possibleOptions.indexOf(result.tip) > -1)
 				done()
 			}, function(err){
 				fail("error thrown in getRandomAdvice(): "+err)
 				done()
+			}).catch(function(err){
+				fail("Exception caught in test: " + err);
+				done();
 			});			
 
 		});
@@ -59,3 +62,4 @@ function addEntry(text){
 	});
 	return deferred.promise;
 }
+

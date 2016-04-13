@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 
+
+var adviceService = require("service/adviceService")
+
 var app = express();
 
 // view engine setup
@@ -22,6 +25,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+
+
+function bootstrapData(){
+  adviceService.getAllData().then(function(result){
+    if(!result || result.length < 1){
+      
+    }
+  })
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

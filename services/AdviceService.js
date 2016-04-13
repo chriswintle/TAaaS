@@ -6,7 +6,7 @@ var Q = require("q");
 
 var AdviceService = function(){
 
-	this.addData = function(text) {
+	this.addAdvice = function(text) {
 		var deferred = Q.defer();
 
 		var advice = new Advice({ tip: text });
@@ -21,7 +21,7 @@ var AdviceService = function(){
 		return deferred.promise;
 	}
 
-	this.getData = function(){
+	this.getAllData = function(){
 		var deferred = Q.defer();
 
 		Advice.find(
@@ -36,15 +36,13 @@ var AdviceService = function(){
 		)
 
 		return deferred.promise;
-
-		//return JSON.parse(fs.readFileSync('./data/advice.json', 'utf8')).advice;
 	}
 	
 	this.getRandomAdvice =  function(){
 		var deferred = Q.defer();
 		var service = this;
 		
-		this.getData().then(function(result){			
+		this.getAllData().then(function(result){			
 			var randomResult = result[service.getRandomIndex(result)];
 			deferred.resolve(randomResult);		
 		}).catch(function(err){
@@ -61,16 +59,13 @@ var AdviceService = function(){
 
 	}
 
-	this.getAllAdvice = function(){
+
+	this.getAdvice = function(id){
 		//TODO IMPLEMENT ME
 	}
 
-	this.getAdvice = function(index){
+	this.editAdvice = function(id, text){
 		//TODO IMPLEMENT ME
-	}
-
-	this.addAdvice = function(text){
-
 	}
 
 }
