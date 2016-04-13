@@ -9,7 +9,7 @@ var fs = require("fs");
 var routes = require('./routes/index');
 
 
-var AdviceService = require("./services/adviceService")
+var AdviceService = require("./services/AdviceService")
 
 var service = new AdviceService();
 
