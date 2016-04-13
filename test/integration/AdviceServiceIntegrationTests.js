@@ -32,42 +32,9 @@ describe('Integration - AdviceService', function() {
         	})
     	});
 
-		it("should return a random entry from available advice", function(done){
-			//given
-			
-			//when
-			service.getRandomAdvice().then(function(result){
-				
-				//then
-				var possibleOptions = ["one", "two", "three"];
-				assert(possibleOptions.indexOf(result.tip) > -1)
-				done()
-			}, function(err){
-				fail("error thrown in getRandomAdvice(): "+err)
-				done()
-			}).catch(function(err){
-				fail("Exception caught in test: " + err);
-				done();
-			});			
-
-		});
+		
 	});
 	
 });
 
-
-
-function addEntry(text){
-	var deferred = Q.defer();
-
-	var adviceItem = new Advice({tip:text});
-
-	adviceItem.save(function(err, item){
-		if(err){
-			deferred.reject(err)
-		}
-		deferred.resolve(item);
-	});
-	return deferred.promise;
-}
 

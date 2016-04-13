@@ -7,59 +7,21 @@ var AdviceService = function(){
 	console.log("service config is: "+JSON.stringify(config))
 
 	this.addAdvice = function(text) {
-		var deferred = Q.defer();
-
-		var advice = new Advice({ tip: text });
-		advice.save(function (err) {
-		  if (err) {
-		    deferred.reject(err);
-		  } else {
-		    deferred.resolve();
-		  }
-		});
-
-		return deferred.promise;
+		//TODO - IMPLEMENT ME
 	}
 
 	this.getAllAdvice = function(){
-		var deferred = Q.defer();
-
-		Advice.find(
-			{},
-			function(err, result){
-				if(err){
-					deferred.reject(err);
-				}
-				
-				deferred.resolve(result) 
-			}
-		)
-
-		return deferred.promise;
+		//TODO - IMPLEMENT ME
 	}
 	
 	this.getRandomAdvice =  function(){
-		var deferred = Q.defer();
-		var service = this;
-		
-		this.getAllAdvice().then(function(result){	
-			var randomResult = result[service.getRandomIndex(result)];
-			deferred.resolve(randomResult);		
-		},function(err){
-			console.log("problem")
-			deferred.reject("error: "+err)
-		}).catch(function(err){
-			console.log("problem 2")
-			deferred.reject("error: "+err)
-		});
-		return deferred.promise;
+		//TODO IMPLEMENT ME
 		
 	}
 
 	this.getRandomIndex = function(obj){
-		var length = obj.length;
-		var index = Math.floor(Math.random() * length);
-		return index;
+		//Math.floor(Math.random() * limit);
+		//TODO IMPLEMENT ME
 
 	}
 
@@ -71,9 +33,6 @@ var AdviceService = function(){
 	this.editAdvice = function(id, text){
 		//TODO IMPLEMENT ME
 	}
-
-	
-
 }
 
 
