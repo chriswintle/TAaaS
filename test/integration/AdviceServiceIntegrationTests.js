@@ -7,6 +7,8 @@ var fs = require("fs");
 
 var service = new AdviceService();
 
+//process.env.NODE_ENV = 'test'
+
 describe('Integration - AdviceService', function() {
 	describe('getRandomAdvice()', function() {
 

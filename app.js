@@ -31,7 +31,7 @@ app.use('/', routes);
 
 
 function bootstrapData(){
-  service.getAllData().then(function(result){
+  service.getAllAdvice().then(function(result){
     if(!result || result.length < 1){
       console.log("BOOSTRAPPING DATA")
       var obj = JSON.parse(fs.readFileSync('./data/advice.json', 'utf8')).advice;
@@ -69,13 +69,15 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
+if (app.get('env') === 'production') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: {}
+    });
   });
-});
+}
 
 app.listen(8080, function () {
   console.log('App Listening on port 8080!');

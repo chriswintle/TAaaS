@@ -21,7 +21,8 @@ var AdviceService = function(){
 		return deferred.promise;
 	}
 
-	this.getAllData = function(){
+	this.getAllAdvice = function(){
+		console.log("GETTING")
 		var deferred = Q.defer();
 
 		Advice.find(
@@ -42,8 +43,10 @@ var AdviceService = function(){
 		var deferred = Q.defer();
 		var service = this;
 		
-		this.getAllData().then(function(result){		
+		this.getAllAdvice().then(function(result){
+		console.log("Got all")		
 			var randomResult = result[service.getRandomIndex(result)];
+			console.log("GOT RANDOM")
 			deferred.resolve(randomResult);		
 		},function(err){
 			console.log("problem")
