@@ -26,12 +26,12 @@ describe('Unit - AdviceService', function() {
 	});
 
 
-	describe("getAdvice()", function(done){
+	describe("getAdvice()", function(){
 
-		it("should return a random entry from advice json", function(){
+		it("should return a random entry from advice json", function(done){
 			//given
 
-			service.getData = function(){
+			service.getAllAdvice = function(){
 				var deferred = Q.defer();
 				var mockedData = [{"tip":"test1"}, {"tip":"test2"}, {"tip":"test3"}]
 				deferred.resolve(mockedData);
@@ -44,7 +44,7 @@ describe('Unit - AdviceService', function() {
 
 			//when
 			service.getRandomAdvice().then(function(result){
-
+				console.log("RESULT IS: "+result.tip)
 				//then
 				assert(result.tip == "test2", "should return second entry in mocked array ");
 				done();
@@ -52,5 +52,5 @@ describe('Unit - AdviceService', function() {
 
 			
 		})
-	})
+	});
 });
