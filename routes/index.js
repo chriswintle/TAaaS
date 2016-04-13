@@ -3,7 +3,7 @@ module.exports = function(config){
 	var router = express.Router();
 
 	var AdviceService = require("../services/AdviceService");
-	var adviceService = new AS();
+	var adviceService = new AdviceService();
 
 
 	router.get('/', function(req, res, next) {
