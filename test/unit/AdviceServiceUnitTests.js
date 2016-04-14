@@ -1,5 +1,10 @@
-var assert = require('chai').assert;
-var mockFS = require('mock-fs');
+var chai = require('chai')
+var spies = require('chai-spies');
+chai.use(spies);
+var assert = chai.assert;
+var expect = chai.except;
+
+
 var fs = require("fs");
 var AdviceService = require('../../services/AdviceService');
 var service = new AdviceService();
@@ -7,9 +12,9 @@ var Q = require("q");
 
 
 describe('Unit - AdviceService', function() {
-	describe('getRandomIndex()', function() {
+	describe('addAdvice()', function() {
 
-		it("should return a number between 0 and 3 where the array is length 4", function(){
+		it("should do something", function(){
 			//given
 
 			//when

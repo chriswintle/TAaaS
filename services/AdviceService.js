@@ -4,7 +4,6 @@ var AdviceService = function(){
 	var config = require("../config/config");
 	var Advice = require("./schema/advice.js")
 
-	console.log("service config is: "+JSON.stringify(config))
 
 	this.addAdvice = function(text) {
 		//TODO - IMPLEMENT ME
