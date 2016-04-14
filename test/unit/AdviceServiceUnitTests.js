@@ -14,14 +14,19 @@ var util = require("util");
 
 
 describe('Unit - AdviceService', function() {
+		
+		
+
 	describe('getAllAdvice()', function() {
 
-		service.getAdviceFromDatabase = function(){
-			var deferred = Q.defer();
-			var mockedAdvice = [{tip:"test1"}, {tip:"test2"}, {tip:"test3"}]
-			deferred.resolve(mockedAdvice);
-			return deferred;
-		}
+		beforeEach(function(){
+			service.getAdviceFromDatabase = function(){
+				var deferred = Q.defer();
+				var mockedAdvice = [{tip:"test1"}, {tip:"test2"}, {tip:"test3"}]
+				deferred.resolve(mockedAdvice);
+				return deferred.promise;
+			}
+		})
 
 
 		it("should exist", function(){
@@ -48,6 +53,8 @@ describe('Unit - AdviceService', function() {
 		it("should return an array of objects with 'tip' attributes", function(){
 			return service.getAllAdvice().then(function(result){
 				expect(result[0].tip, "tip should exist").to.equal("test1");
+				expect(result[1].tip, "tip should exist").to.equal("test2");
+				expect(result[2].tip, "tip should exist").to.equal("test3");
 			});
 		});
 
@@ -57,14 +64,89 @@ describe('Unit - AdviceService', function() {
 			return service.getAllAdvice().then(function(result){
 				expect(spy).to.have.been.called();
 			})
+		});
+
+		it("should return an empty array when DB call fails", function(){
+
+			service.getAdviceFromDatabase = function(){
+				var deferred = Q.defer();
+				var mockedAdvice = []
+				deferred.resolve(null);
+				return deferred.promise;
+			}	
+
+
+			return service.getAllAdvice().then(
+				function(result){
+					expect(result).to.equal(null);
+				},
+				function(errorResult){
+					expect(util.isArray(errorResult)).to.equal(true);
+					expect(errorResult.length).to.equal(0);
+				}
+			);
+		});
+
+	});
+
+	describe("getRandomAdvice()", function(){
+
+		beforeEach(function(){
+			service.getAdviceFromDatabase = function(){
+				var deferred = Q.defer();
+				var mockedAdvice = [{tip:"test1"}, {tip:"test2"}, {tip:"test3"}]
+				deferred.resolve(mockedAdvice);
+				return deferred.promise;
+			}
+
+			service.getRandomIndex = function(max){
+				return 2;
+			}
 		})
+		
+		it("should return something", function(){
+			var result = service.getRandomAdvice();
+			assert(result != undefined);
+		})
+		it("should return a promise", function(){
+			return service.getRandomAdvice().then(function(result){
+				expect(result).to.not.equal(undefined);
+			});
+		});
+
+		it("should return an Object", function(){
+			return service.getRandomAdvice().then(function(result){
+				console.log(result);
+				expect(util.isArray(result)).to.equal(false);
+			})
+		})
+
+		it("should return an Object with a 'tip' attribute", function(){
+			return service.getRandomAdvice().then(function(result){
+				console.log(result);
+				expect(result.tip).to.not.equal(undefined);
+			})
+		});
+
+		it("should call 'getAdviceFromDatabase'", function(){
+			var spy = chai.spy.on(service, 'getAdviceFromDatabase');
+
+			return service.getRandomAdvice().then(function(result){
+				expect(spy).to.have.been.called();
+			})
+		});
+
+		it("should call 'getRandomIndex'", function(){
+			var spy = chai.spy.on(service, 'getRandomIndex');
+
+			return service.getRandomAdvice().then(function(result){
+				expect(spy).to.have.been.called();
+			})
+		});
+
+
 
 	});
 });
 
 
-function addAdviceToDatabase(text){
-	var deferred = Q.defer();
-
-
-}

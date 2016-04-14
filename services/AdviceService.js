@@ -9,26 +9,46 @@ var AdviceService = function(){
 	// 	//TODO - IMPLEMENT ME
 	// }
 
+
+	this.getAdviceFromDatabase = function(){
+
+	}
+
+	this.getRandomIndex = function(max){
+
+	}
+
 	
 
 	this.getAllAdvice = function(){
 		var deferred = Q.defer();
 		this.getAdviceFromDatabase().then(function(result){
-			deferred.resolve(result);
+			if(result == null){
+				console.log("Error caught retrieving data from DB")
+				deferred.reject([])
+			}
+			else {
+				deferred.resolve(result);
+			}
 		})
 	
 		return deferred.promise;
 	}
 	
-
-	this.getAdviceFromDatabase = function(){
+	this.getRandomAdvice =  function(){
+		var deferred = Q.defer();
+		var $this = this;
 		
-
+		this.getAdviceFromDatabase().then(
+			function(result){
+				var index = $this.getRandomIndex(result.length -1);
+				var advice = result[index];
+				deferred.resolve(advice);
+			})
+		
+		return deferred.promise;
+		
 	}
-	// this.getRandomAdvice =  function(){
-	// 	//TODO IMPLEMENT ME
-		
-	// }
 
 
 	// this.editAdvice = function(id, text){
