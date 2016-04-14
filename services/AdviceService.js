@@ -5,33 +5,35 @@ var AdviceService = function(){
 	var Advice = require("./schema/advice.js")
 
 
-	this.addAdvice = function(text) {
-		//TODO - IMPLEMENT ME
-	}
+	// this.addAdvice = function(text) {
+	// 	//TODO - IMPLEMENT ME
+	// }
+
+	
 
 	this.getAllAdvice = function(){
-		//TODO - IMPLEMENT ME
+		var deferred = Q.defer();
+		this.getAdviceFromDatabase().then(function(result){
+			deferred.resolve(result);
+		})
+	
+		return deferred.promise;
 	}
 	
-	this.getRandomAdvice =  function(){
-		//TODO IMPLEMENT ME
+
+	this.getAdviceFromDatabase = function(){
 		
-	}
-
-	this.getRandomIndex = function(obj){
-		//Math.floor(Math.random() * limit);
-		//TODO IMPLEMENT ME
 
 	}
+	// this.getRandomAdvice =  function(){
+	// 	//TODO IMPLEMENT ME
+		
+	// }
 
 
-	this.getAdvice = function(id){
-		//TODO IMPLEMENT ME
-	}
-
-	this.editAdvice = function(id, text){
-		//TODO IMPLEMENT ME
-	}
+	// this.editAdvice = function(id, text){
+	// 	//TODO IMPLEMENT ME
+	// }
 }
 
 

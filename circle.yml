@@ -5,10 +5,6 @@ machine:
     - docker
     - mongo
 
-dependencies:
-  pre:
-    - pip install awscli
-
 
 deployment:
   staging:
