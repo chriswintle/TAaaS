@@ -116,35 +116,50 @@ describe('Unit - AdviceService', function() {
 
 		it("should return an Object", function(){
 			return service.getRandomAdvice().then(function(result){
-				console.log(result);
 				expect(util.isArray(result)).to.equal(false);
 			})
 		})
 
 		it("should return an Object with a 'tip' attribute", function(){
 			return service.getRandomAdvice().then(function(result){
-				console.log(result);
 				expect(result.tip).to.not.equal(undefined);
 			})
 		});
 
-		it("should call 'getAdviceFromDatabase'", function(){
-			var spy = chai.spy.on(service, 'getAdviceFromDatabase');
+		// it("should call 'getAdviceFromDatabase'", function(){
+		// 	var spy = chai.spy.on(service, 'getA345dviceFromDatabase');
 
+		// 	return service.getRandomAdvice().then(function(result){
+		// 		expect(spy).to.have.been.called();
+		// 	})
+		// });
+
+		// it("should call 'getRandomIndex'", function(){
+		// 	var spy = chai.spy.on(service, 'getRandomIndex');
+
+		// 	return service.getRandomAdvice().then(function(result){
+		// 		expect(spy).to.have.been.called();
+		// 	})
+		// });
+
+
+		it("should return an object with a 'tip' attribute", function(){
 			return service.getRandomAdvice().then(function(result){
-				expect(spy).to.have.been.called();
+				expect(result.tip).to.equal("test3")
 			})
+		})
+
+
+	});
+
+	describe("getRandomIndex", function(){
+		var newService = new AdviceService();
+
+		it("should return a number between 0 and a max", function(){
+			var result = newService.getRandomIndex(1);
+			assert(result >=0 );
+			assert(result < 1 );
 		});
-
-		it("should call 'getRandomIndex'", function(){
-			var spy = chai.spy.on(service, 'getRandomIndex');
-
-			return service.getRandomAdvice().then(function(result){
-				expect(spy).to.have.been.called();
-			})
-		});
-
-
 
 	});
 });

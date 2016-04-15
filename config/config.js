@@ -9,7 +9,7 @@ else if (process.env.NODE_ENV === 'test') {
     mongo_url = "192.168.99.100:32771";
 }
 else {
-	console.log("NOT TEST MODE")
+ 
     mongo_url = "192.168.99.100:32772";
 }
 config.mongo_url = mongo_url;

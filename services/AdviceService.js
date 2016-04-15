@@ -11,11 +11,21 @@ var AdviceService = function(){
 
 
 	this.getAdviceFromDatabase = function(){
+		var deferred = Q.defer();
+		Advice.find({}, function(err, result){
+			if(err){
+				console.log("ERROR ON GET: "+ err)
+				deferred.reject([]);
+			}
+			console.log(result)
+			deferred.resolve(result);
+		})
+		return deferred.promise;
 
 	}
 
 	this.getRandomIndex = function(max){
-
+		return Math.floor(Math.random() * max);
 	}
 
 	
