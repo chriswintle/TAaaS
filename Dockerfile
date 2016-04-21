@@ -1,12 +1,7 @@
-FROM node:argon
-
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-# Install app dependencies
-COPY package.json /usr/src/app/
+FROM node:5-wheezy
+WORKDIR /app
+ADD / /app
+RUN npm install -g nodemon
 RUN npm install
-
-EXPOSE 8080
-
-CMD [ "npm", "start" ]
+EXPOSE 3010
+CMD npm start
