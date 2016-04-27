@@ -79,8 +79,8 @@ if (app.get('env') === 'production') {
   });
 }
 
-app.listen(80, function () {
-  console.log('App Listening on port 80!');
+app.listen(3001, function () {
+  console.log('App Listening on port 3001!');
 });
 
 
